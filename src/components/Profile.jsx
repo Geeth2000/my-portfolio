@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FiMail } from "react-icons/fi";
 
 function Profile() {
   const canvasRef = useRef(null);
@@ -197,28 +199,55 @@ function Profile() {
           </h2>
 
           {/* About paragraph */}
-          <p className="text-base sm:text-lg text-gray-400 leading-relaxed text-pretty mx-auto lg:mx-0 max-w-[95%] sm:max-w-[80%] lg:max-w-none">
-            Hi, I'm{" "}
-            <span className="font-semibold text-purple-300">
-              Geethanjana Karunarathna
-            </span>
-            , a web developer who loves turning ideas into clean, functional,
-            and attractive web experiences. I study{" "}
-            <span className="font-semibold text-purple-300">B.ICT (Hons)</span>{" "}
-            at the{" "}
-            <span className="text-purple-300">University of Colombo</span>, and
-            I'm passionate about front-end development and modern web
-            technologies like <span className="text-purple-300">React</span>,{" "}
-            <span className="text-purple-300">Tailwind CSS</span>, and the{" "}
-            <span className="text-purple-300">MERN stack</span>. I enjoy
-            learning new tools and building creative projects that make user
-            interaction simple and enjoyable.
+          <p className="text-lg sm:text-xl text-gray-400">
+            Full-stack web developer passionate about building modern, scalable,
+            and user-focused web applications.
+          </p>
+          <p className="text-base sm:text-lg text-gray-500 italic">
+            Currently pursuing B.ICT (Hons) at the University of Colombo.
           </p>
 
-          {/* Tagline */}
-          <p className="text-sm sm:text-base text-gray-500 italic">
-            ICT Undergraduate | University of Colombo
-          </p>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-end gap-4 sm:gap-6">
+            <a
+              href="Geethanjana_CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-linear-to-r from-purple-600 to-fuchsia-500 text-white font-semibold shadow-[0_0_20px_rgba(168,85,247,0.45)] transition-transform duration-300 hover:scale-105"
+            >
+              Download CV
+            </a>
+
+            <div className="flex items-center justify-center sm:justify-end gap-3">
+              {[
+                {
+                  href: "https://github.com/Geeth2000",
+                  label: "GitHub",
+                  icon: <FaGithub className="text-xl" />,
+                },
+                {
+                  href: "https://www.linkedin.com/in/geethanjana-karunarathna/",
+                  label: "LinkedIn",
+                  icon: <FaLinkedin className="text-xl" />,
+                },
+                {
+                  href: "mailto:geethanjankaru123@gmail.com",
+                  label: "Email",
+                  icon: <FiMail className="text-xl" />,
+                },
+              ].map(({ href, label, icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex h-12 w-12 items-center justify-center rounded-full border border-purple-500/40 text-purple-200 transition-all duration-300 hover:text-fuchsia-400 hover:border-fuchsia-400 hover:shadow-[0_0_15px_rgba(168,85,247,0.35)] focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                >
+                  {icon}
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

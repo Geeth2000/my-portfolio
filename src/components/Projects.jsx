@@ -3,40 +3,49 @@ import React, { useEffect, useRef, useState } from "react";
 function Projects() {
   const projects = [
     {
-      title: "Project Aurora",
+      title: "I-Computers E-Commerce Platform",
       description:
-        "A concept dashboard that explores minimalist UI elements, responsive layouts, and lightweight animation hooks for quick prototypes.",
-      technologies: "React, Tailwind CSS, Framer Motion",
-      github: "https://github.com/example/project-aurora",
+        "Full-stack online store for computers, laptops, and accessories with secure authentication, persistent carts, and streamlined order management.",
+      technologies: "MongoDB, Express.js, React, Node.js, Tailwind CSS",
+      github: "https://github.com/Geeth2000/i-computers",
       tag: "project 1",
-      image: "https://via.placeholder.com/600x400?text=Project+Aurora",
+      image: "https://via.placeholder.com/600x400?text=I-Computers",
     },
     {
-      title: "Project Nebula",
+      title: "Portfolio Website",
       description:
-        "An experimental AI chatbot shell that mocks conversational flows, context windows, and canned responses for usability testing.",
-      technologies: "React, Zustand, OpenAI SDK (mocked)",
-      github: "https://github.com/example/project-nebula",
+        "Personal portfolio crafted to showcase projects, skills, and experience with polished UI styling, smooth animations, and performance optimizations.",
+      technologies: "React, Tailwind CSS, JavaScript",
+      github: "https://github.com/Geeth2000/portfolio",
       tag: "project 2",
-      image: "https://via.placeholder.com/600x400?text=Project+Nebula",
+      image: "https://via.placeholder.com/600x400?text=Portfolio",
     },
     {
-      title: "Project Horizon",
+      title: "FOT Connect Mobile App",
       description:
-        "A dummy analytics page that simulates data fetching, renders placeholder charts, and illustrates theming support.",
-      technologies: "React, Recharts (mocked), Styled Components",
-      github: "https://github.com/example/project-horizon",
+        "Native Android application delivering faculty news, sports, and event updates with responsive screens based on Figma prototypes.",
+      technologies: "Android Studio, Java, XML, Figma",
+      github: "https://github.com/Geeth2000/fot-connect",
       tag: "project 3",
-      image: "https://via.placeholder.com/600x400?text=Project+Horizon",
+      image: "https://via.placeholder.com/600x400?text=FOT+Connect",
     },
     {
-      title: "Project Zenith",
+      title: "Student Mentoring System",
       description:
-        "A sample landing page showcasing modular hero sections, feature grids, and call-to-action components.",
-      technologies: "React, Vite, CSS Modules",
-      github: "https://github.com/example/project-zenith",
+        "University mini-project enabling students and lecturers to schedule mentoring sessions, backed by REST APIs and GitHub-driven collaboration.",
+      technologies: "MongoDB, Express.js, React, Node.js",
+      github: "https://github.com/Geeth2000/student-mentoring-system",
       tag: "project 4",
-      image: "https://via.placeholder.com/600x400?text=Project+Zenith",
+      image: "https://via.placeholder.com/600x400?text=Mentoring",
+    },
+    {
+      title: "Library Management System",
+      description:
+        "Web portal for managing library inventory, user accounts, and circulation tasks with responsive layouts and full CRUD workflows.",
+      technologies: "PHP, HTML, CSS, JavaScript, MySQL",
+      github: "https://github.com/Geeth2000/library-management",
+      tag: "project 5",
+      image: "https://via.placeholder.com/600x400?text=Library",
     },
   ];
 
@@ -69,7 +78,7 @@ function Projects() {
           }}
         ></div>
       </div>
-      <div className="absolute inset-0 bg-gradient-to-br from-[#1a002b]/60 via-[#20034d]/70 to-[#0b0014]/90"></div>
+      <div className="absolute inset-0 bg-linear-to-br from-[#1a002b]/60 via-[#20034d]/70 to-[#0b0014]/90"></div>
 
       <div className="container mx-auto px-4 max-w-7xl relative z-10 py-20">
         {/* Title */}
@@ -79,11 +88,12 @@ function Projects() {
             animateTitle ? "animate-slide-in" : "opacity-0 translate-x-24"
           }`}
         >
-          <h2 className="text-5xl lg:text-6xl font-black tracking-tighter mb-4 text-transparent bg-gradient-to-r from-purple-400 via-fuchsia-500 to-purple-700 bg-clip-text">
+          <h2 className="text-5xl lg:text-6xl font-black tracking-tighter mb-4 text-transparent bg-linear-to-r from-purple-400 via-fuchsia-500 to-purple-700 bg-clip-text">
             Featured Projects
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Explore my latest work in DevOps, automation, and cloud deployment.
+            Explore my latest projects in full-stack development, web design,and
+            modern app creation.
           </p>
         </div>
 
@@ -92,7 +102,7 @@ function Projects() {
           {projects.map((project, index) => (
             <div
               key={index}
-              className="group relative bg-gradient-to-br from-[#1a002b]/80 to-black rounded-3xl 
+              className="group relative bg-linear-to-br from-[#1a002b]/80 to-black rounded-3xl 
                          border border-purple-600/40 hover:border-purple-400 
                          transition-all duration-500 transform hover:-translate-y-3 
                          hover:shadow-[0_0_25px_rgba(168,85,247,0.6)] overflow-hidden"
@@ -111,7 +121,7 @@ function Projects() {
               )}
 
               <div className="p-6">
-                <h3 className="text-2xl font-bold text-white mt-4 bg-gradient-to-r from-purple-400 via-pink-500 to-purple-700 bg-clip-text text-transparent">
+                <h3 className="text-2xl font-bold mt-4 bg-linear-to-r from-purple-400 via-pink-500 to-purple-700 bg-clip-text text-transparent">
                   {project.title}
                 </h3>
                 <p className="text-gray-300 mt-2">{project.description}</p>

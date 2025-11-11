@@ -57,7 +57,7 @@ function Certifications() {
     >
       <div className="absolute inset-0 bg-linear-to-b from-[#1a002b]/70 via-[#20034d]/80 to-[#0b0014]/90 opacity-70"></div>
 
-      <div className="container mx-auto px-4 max-w-7xl relative z-10 py-10 sm:py-16">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10 py-12 sm:py-16">
         <div className="text-center mb-12">
           <h2
             className={`text-4xl sm:text-5xl lg:text-6xl font-black text-transparent bg-linear-to-r from-purple-400 via-fuchsia-500 to-purple-700 bg-clip-text transition-all duration-700 ${
@@ -76,11 +76,11 @@ function Certifications() {
         </div>
 
         {/* CERTIFICATE CARDS */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 place-items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-8 place-items-center">
           {certs.map((cert, i) => (
             <div
               key={i}
-              className={`group relative h-64 w-full max-w-sm transition-all duration-700 ${
+              className={`group relative h-64 w-full max-w-xs sm:max-w-sm transition-all duration-700 ${
                 isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-10"
@@ -89,7 +89,7 @@ function Certifications() {
             >
               <div className="relative w-full h-full bg-linear-to-br from-[#1a002b]/70 to-black rounded-xl border border-purple-600/40 hover:border-purple-400 transition-all duration-300 overflow-hidden">
                 {/* Front */}
-                <div className="flex flex-col items-center justify-center h-full p-5 space-y-3 transition-opacity duration-300 group-hover:opacity-0">
+                <div className="flex flex-col items-center justify-center h-full px-6 py-5 space-y-3 transition-opacity duration-300 group-hover:opacity-0">
                   <div className="w-14 h-14 flex items-center justify-center">
                     <img
                       src={cert.badge}
@@ -102,14 +102,16 @@ function Certifications() {
                       {cert.code}
                     </span>
                   </div>
-                  <h3 className="text-lg font-bold text-white text-center">
+                  <h3 className="text-base sm:text-lg font-bold text-white text-center">
                     {cert.name}
                   </h3>
-                  <p className="text-gray-400 text-sm">{cert.provider}</p>
+                  <p className="text-gray-400 text-xs sm:text-sm">
+                    {cert.provider}
+                  </p>
                 </div>
 
                 {/* Back Hover Layer */}
-                <div className="absolute inset-0 bg-linear-to-br from-purple-900 to-black p-5 flex flex-col items-center justify-center space-y-3 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                <div className="absolute inset-0 bg-linear-to-br from-purple-900 to-black px-6 py-5 flex flex-col items-center justify-center space-y-3 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                   <div className="w-14 h-14 flex items-center justify-center">
                     <img
                       src={cert.badge}
@@ -117,13 +119,13 @@ function Certifications() {
                       className="w-full h-full object-contain filter brightness-90"
                     />
                   </div>
-                  <h3 className="text-lg font-bold text-white text-center">
+                  <h3 className="text-base sm:text-lg font-bold text-white text-center">
                     {cert.name}
                   </h3>
-                  <p className="text-purple-300 text-sm text-center">
+                  <p className="text-purple-300 text-xs sm:text-sm text-center">
                     Credential ID: {cert.credentialId}
                   </p>
-                  <div className="inline-flex items-center text-purple-200 group-hover:translate-x-1 transition-transform duration-300 cursor-pointer text-sm">
+                  <div className="inline-flex items-center text-purple-200 group-hover:translate-x-1 transition-transform duration-300 cursor-pointer text-xs sm:text-sm">
                     <span className="font-semibold">View Certificate</span>
                     <span className="ml-1">→</span>
                   </div>

@@ -13,9 +13,9 @@ function Profile() {
   const [loopNum, setLoopNum] = useState(0);
   const [speed, setSpeed] = useState(150);
   const words = [
-    "Full‑Stack Web Developer",
-    "Problem Solver",
-    "Tech Enthusiast",
+    "<Full-Stack Web Developer/>",
+    "<Problem Solver/>",
+    "<Tech Enthusiast/>",
   ];
 
   useEffect(() => {
@@ -164,7 +164,7 @@ function Profile() {
       />
       <div className="absolute inset-0 bg-linear-to-br from-gray-900 via-black to-gray-900 opacity-60"></div>
 
-      <div className="relative z-10 flex flex-col-reverse lg:flex-row items-center justify-center gap-12 lg:gap-16 max-w-6xl mx-auto w-full">
+      <div className="relative z-10 flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-16 max-w-6xl mx-auto w-full">
         {/* Profile Image with 3D tilt */}
         <div
           ref={imageRef}

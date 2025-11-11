@@ -81,7 +81,11 @@ function App() {
           <ul className="hidden md:flex space-x-8">
             {navItems.map((item) => (
               <li key={item.id}>
-                <a href={`#${item.id}`} className={getNavItemClass(item.id)}>
+                <a
+                  href={`#${item.id}`}
+                  className={getNavItemClass(item.id)}
+                  onClick={() => setActiveSection(item.id)}
+                >
                   {item.label}
                 </a>
               </li>
@@ -104,7 +108,10 @@ function App() {
                 <a
                   href={`#${item.id}`}
                   className={`${getNavItemClass(item.id)} text-lg text-center`}
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={() => {
+                    setActiveSection(item.id);
+                    setMobileMenuOpen(false);
+                  }}
                 >
                   {item.label}
                 </a>

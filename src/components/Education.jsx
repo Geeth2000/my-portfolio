@@ -67,7 +67,7 @@ function Education() {
     <section
       id="education"
       ref={sectionRef}
-      className="relative py-20 md:py-24 min-h-screen bg-black text-white overflow-hidden"
+      className="relative py-16 sm:py-20 md:py-24 min-h-screen bg-black text-white overflow-hidden"
     >
       {/* Background grid & gradient */}
       <div className="absolute inset-0 opacity-20 pointer-events-none">
@@ -80,13 +80,13 @@ function Education() {
           }}
         ></div>
       </div>
-      <div className="absolute inset-0 bg-gradient-to-br from-[#1a002b]/70 via-[#20034d]/80 to-[#0b0014]/90"></div>
+      <div className="absolute inset-0 bg-linear-to-br from-[#1a002b]/70 via-[#20034d]/80 to-[#0b0014]/90"></div>
 
-      <div className="container mx-auto px-6 max-w-6xl relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 max-w-6xl relative z-10">
         <div className="text-center mb-16">
           <h2
             id="edu-title"
-            className={`text-4xl md:text-5xl font-extrabold text-transparent bg-gradient-to-r from-purple-400 via-fuchsia-500 to-purple-700 bg-clip-text transition-all duration-1000 ease-out ${
+            className={`text-3xl sm:text-4xl md:text-5xl font-extrabold text-transparent bg-linear-to-r from-purple-400 via-fuchsia-500 to-purple-700 bg-clip-text transition-all duration-1000 ease-out ${
               isTitleVisible
                 ? "opacity-100 translate-x-0"
                 : "opacity-0 -translate-x-32"
@@ -95,7 +95,7 @@ function Education() {
             Academic Journey
           </h2>
           <p
-            className={`mt-4 text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed transition-opacity duration-1000 ${
+            className={`mt-4 text-gray-400 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed transition-opacity duration-1000 ${
               isTitleVisible ? "opacity-100" : "opacity-0"
             }`}
           >
@@ -115,7 +115,7 @@ function Education() {
               <div
                 key={index}
                 data-index={index}
-                className={`edu-card relative mb-12 flex flex-col md:flex-row items-center ${
+                className={`edu-card relative mb-12 last:mb-0 flex flex-col md:flex-row items-center ${
                   direction === "left" ? "md:flex-row" : "md:flex-row-reverse"
                 } transition-all duration-1000 ease-out ${
                   isVisible
@@ -130,27 +130,29 @@ function Education() {
 
                 {/* card */}
                 <div
-                  className={`w-full md:w-5/12 p-8 rounded-2xl bg-gradient-to-b from-[#1a002b]/80 to-black border border-purple-600/30 shadow-lg transition-transform duration-500 ease-in-out hover:scale-105 hover:shadow-[0_0_25px_rgba(168,85,247,0.6)] hover:-translate-y-2 hover:rotate-1 ${
+                  className={`w-full md:w-5/12 max-w-xl p-6 sm:p-8 rounded-2xl bg-linear-to-b from-[#1a002b]/80 to-black border border-purple-600/30 shadow-lg transition-transform duration-500 ease-in-out hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(168,85,247,0.6)] hover:-translate-y-2 ${
                     direction === "left" ? "md:mr-12" : "md:ml-12"
                   }`}
                   style={{ perspective: "1000px" }}
                 >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6">
-                    <div className="flex items-center space-x-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
+                    <div className="flex items-center gap-4 flex-wrap sm:flex-nowrap">
                       <img
                         src={edu.logo}
                         alt={`${edu.institution} logo`}
                         className="w-16 h-16 object-contain drop-shadow-[0_0_10px_rgba(168,85,247,0.6)]"
                       />
                       <div>
-                        <h3 className="text-xl font-semibold text-white">
+                        <h3 className="text-lg sm:text-xl font-semibold text-white">
                           {edu.institution}
                         </h3>
-                        <p className="text-purple-300 text-sm">{edu.period}</p>
+                        <p className="text-purple-300 text-sm sm:text-base">
+                          {edu.period}
+                        </p>
                       </div>
                     </div>
                   </div>
-                  <p className="text-gray-300 text-base leading-relaxed">
+                  <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
                     {edu.degree}
                   </p>
                 </div>

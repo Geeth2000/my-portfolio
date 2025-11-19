@@ -49,24 +49,55 @@ function Projects() {
     },
   ];
 
-  const titleRef = useRef(null);
-  const [animateTitle, setAnimateTitle] = useState(false);
+  const sectionRef = useRef(null);
+  const [titleVisible, setTitleVisible] = useState(false);
+  const [visibleProjects, setVisibleProjects] = useState([]);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    const section = sectionRef.current;
+    if (!section) return undefined;
+
+    const titleEl = section.querySelector("#projects-title");
+    const cardEls = section.querySelectorAll(".project-card");
+
+    const titleObserver = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) setAnimateTitle(true);
+        if (!entries.length) return;
+        const entry = entries[0];
+        setTitleVisible(entry.isIntersecting);
       },
-      { threshold: 0.5 }
+      { threshold: 0.25 }
     );
-    if (titleRef.current) observer.observe(titleRef.current);
+
+    const cardObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = parseInt(entry.target.dataset.index, 10);
+          if (Number.isNaN(index)) return;
+
+          if (entry.isIntersecting) {
+            setVisibleProjects((prev) =>
+              prev.includes(index) ? prev : [...prev, index]
+            );
+          } else {
+            setVisibleProjects((prev) => prev.filter((idx) => idx !== index));
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    if (titleEl) titleObserver.observe(titleEl);
+    cardEls.forEach((card) => cardObserver.observe(card));
+
     return () => {
-      if (titleRef.current) observer.unobserve(titleRef.current);
+      titleObserver.disconnect();
+      cardObserver.disconnect();
     };
   }, []);
 
   return (
-    <section id="projects" className="bg-black relative">
+    <section ref={sectionRef} id="projects" className="bg-black relative">
       {/* subtle purple grid background */}
       <div className="absolute inset-0 opacity-20 pointer-events-none">
         <div
@@ -83,12 +114,16 @@ function Projects() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10 py-16 sm:py-20">
         {/* Title */}
         <div
-          ref={titleRef}
-          className={`text-center mb-20 transition-all duration-1000 ${
-            animateTitle ? "animate-slide-in" : "opacity-0 translate-x-24"
+          className={`text-center mb-20 transition-all duration-1000 ease-out ${
+            titleVisible
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-16"
           }`}
         >
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter mb-4 text-transparent bg-linear-to-r from-purple-400 via-fuchsia-500 to-purple-700 bg-clip-text">
+          <h2
+            id="projects-title"
+            className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter mb-4 text-transparent bg-linear-to-r from-purple-400 via-fuchsia-500 to-purple-700 bg-clip-text"
+          >
             Featured Projects
           </h2>
           <p className="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto">
@@ -99,66 +134,60 @@ function Projects() {
 
         {/* Project cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          {projects.map((project, index) => (
-            <div
-              key={index}
-              className="group relative flex flex-col bg-linear-to-br from-[#1a002b]/80 to-black rounded-3xl 
-                         border border-purple-600/40 hover:border-purple-400 
-                         transition-all duration-500 hover:-translate-y-3 
-                         hover:shadow-[0_0_25px_rgba(168,85,247,0.6)] overflow-hidden"
-              style={{
-                animation: `fadeIn 0.8s ease-out ${index * 0.2}s backwards`,
-              }}
-            >
-              {project.image && (
-                <div className="overflow-hidden mx-4 mt-4 rounded-2xl border border-purple-800/40">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-56 sm:h-64 object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                </div>
-              )}
+          {projects.map((project, index) => {
+            const isVisible = visibleProjects.includes(index);
+            const direction = index % 2 === 0 ? "left" : "right";
 
-              <div className="p-6 sm:p-8 flex flex-col flex-1">
-                <h3 className="text-2xl sm:text-3xl font-bold mt-4 bg-linear-to-r from-purple-400 via-pink-500 to-purple-700 bg-clip-text text-transparent">
-                  {project.title}
-                </h3>
-                <p className="text-gray-300 text-sm sm:text-base mt-3 leading-relaxed">
-                  {project.description}
-                </p>
-                <p className="text-xs sm:text-sm text-gray-400 mt-3">
-                  <span className="font-semibold text-purple-300">
-                    Tech Stack:{" "}
-                  </span>
-                  {project.technologies}
-                </p>
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 mt-4 sm:mt-6 text-sm sm:text-base text-purple-300 hover:text-fuchsia-400 transition-colors font-semibold"
-                >
-                  View Project →
-                </a>
+            return (
+              <div
+                key={index}
+                data-index={index}
+                className={`project-card group relative flex flex-col bg-linear-to-br from-[#1a002b]/80 to-black rounded-3xl border border-purple-600/40 hover:border-purple-300 transition-all duration-1000 ease-out hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(168,85,247,0.45)] overflow-hidden ${
+                  isVisible
+                    ? "opacity-100 translate-y-0 md:translate-x-0"
+                    : direction === "left"
+                    ? "opacity-0 translate-y-10 md:-translate-x-24"
+                    : "opacity-0 translate-y-10 md:translate-x-24"
+                }`}
+                style={{ transitionDelay: `${index * 0.12}s` }}
+              >
+                {project.image && (
+                  <div className="overflow-hidden mx-4 mt-4 rounded-2xl border border-purple-800/40">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-56 sm:h-64 object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                )}
+
+                <div className="p-6 sm:p-8 flex flex-col flex-1">
+                  <h3 className="text-2xl sm:text-3xl font-bold mt-4 bg-linear-to-r from-purple-400 via-pink-500 to-purple-700 bg-clip-text text-transparent">
+                    {project.title}
+                  </h3>
+                  <p className="text-gray-300 text-sm sm:text-base mt-3 leading-relaxed">
+                    {project.description}
+                  </p>
+                  <p className="text-xs sm:text-sm text-gray-400 mt-3">
+                    <span className="font-semibold text-purple-300">
+                      Tech Stack:{" "}
+                    </span>
+                    {project.technologies}
+                  </p>
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 mt-4 sm:mt-6 text-sm sm:text-base text-purple-300 hover:text-fuchsia-400 transition-colors font-semibold"
+                  >
+                    View Project →
+                  </a>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
-
-      <style>{`
-        @keyframes slideInFromRight {
-          from { transform: translateX(100%); opacity: 0; }
-          to { transform: translateX(0); opacity: 1; }
-        }
-        .animate-slide-in { animation: slideInFromRight 0.8s ease-out forwards; }
-
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
     </section>
   );
 }

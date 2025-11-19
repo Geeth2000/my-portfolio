@@ -21,19 +21,20 @@ function Skills() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setIsVisible(true);
-        });
+        if (!entries.length) return;
+        const entry = entries[0];
+        setIsVisible(entry.isIntersecting);
       },
-      { threshold: 0.1 }
+      { threshold: 0.3 }
     );
 
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => {
-      if (sectionRef.current) observer.unobserve(sectionRef.current);
-    };
+    observer.observe(section);
+    return () => observer.disconnect();
   }, []);
 
   const skills = [
@@ -73,14 +74,14 @@ function Skills() {
         {/* Section title */}
         <div className="text-center mb-16">
           <h2
-            className={`text-4xl sm:text-5xl font-extrabold tracking-tight text-transparent bg-gradient-to-r from-purple-400 via-fuchsia-500 to-purple-700 bg-clip-text mb-3 transition-all ${
+            className={`text-4xl sm:text-5xl font-extrabold tracking-tight text-transparent bg-linear-to-r from-purple-400 via-fuchsia-500 to-purple-700 bg-clip-text mb-3 transition-all ${
               isVisible ? "animate-fadeInUp" : "opacity-0 translate-y-6"
             }`}
           >
             My Skills
           </h2>
           <div
-            className={`h-1 w-24 mx-auto bg-gradient-to-r from-purple-400 to-pink-500 transition-all duration-700 ${
+            className={`h-1 w-24 mx-auto bg-linear-to-r from-purple-400 to-pink-500 transition-all duration-700 ${
               isVisible ? "opacity-100" : "opacity-0"
             }`}
           ></div>
@@ -91,21 +92,24 @@ function Skills() {
           {skills.map(({ Icon, label, color }, i) => (
             <div
               key={i}
-              className={`relative group flex flex-col items-center justify-center p-8 rounded-xl 
-                          border border-purple-600/20 bg-gradient-to-b from-[#1a002b]/60 to-[#0b0014]/60
-                          transition-all duration-500 hover:scale-105 hover:shadow-[0_0_25px_rgba(168,85,247,0.6)] ${
+              className={`relative group p-8 rounded-xl border border-purple-600/20 bg-linear-to-b from-[#1a002b]/60 to-[#0b0014]/60
+                          transition-all duration-500 hover:-translate-y-2 hover:border-purple-400 hover:shadow-[0_0_30px_rgba(168,85,247,0.45)] ${
                             isVisible
                               ? "animate-fadeInUp"
                               : "opacity-0 translate-y-4"
                           }`}
               style={{ animationDelay: `${i * 0.1}s` }}
             >
-              <Icon
-                size={50}
-                style={{ color }}
-                className="drop-shadow-[0_0_8px_rgba(168,85,247,0.7)] transition-transform duration-300 group-hover:scale-110"
-              />
-              <p className="mt-4 font-semibold text-gray-200">{label}</p>
+              <div className="absolute inset-0 rounded-xl bg-linear-to-r from-purple-500/20 via-fuchsia-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
+
+              <div className="relative z-10 flex flex-col items-center justify-center">
+                <Icon
+                  size={50}
+                  style={{ color }}
+                  className="drop-shadow-[0_0_8px_rgba(168,85,247,0.7)] transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-110"
+                />
+                <p className="mt-4 font-semibold text-gray-200">{label}</p>
+              </div>
             </div>
           ))}
         </div>

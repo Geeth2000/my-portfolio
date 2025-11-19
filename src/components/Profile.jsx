@@ -175,7 +175,7 @@ function Profile() {
           }}
         >
           <img
-            src="https://media.licdn.com/dms/image/v2/D5603AQGNpL_IDxH1Bg/profile-displayphoto-scale_400_400/B56ZltMdt9KIAk-/0/1758473614107?e=1762992000&v=beta&t=xdf3wmijRDJmxMXHHETfPAvyPpYLjN7AMKPOoxCrI1w"
+            src="profile.png"
             alt="Geethanjana Karunarathna"
             className="relative w-full h-full rounded-full border-[6px] border-purple-500/40 object-cover shadow-[0_0_40px_rgba(168,85,247,0.8)]"
           />

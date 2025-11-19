@@ -1,52 +1,85 @@
 import React, { useEffect, useRef, useState } from "react";
+import mernBadge from "../assets/ifs.png";
+import postmanBadge from "../assets/postmon.png";
+import pythonBadge from "../assets/image.png";
+import aviatrixBadge from "../assets/ace.png";
 
 function Certifications() {
   const certs = [
     {
-      name: "Certified Front-End Explorer",
-      code: "CFE-101",
-      provider: "UI Labs",
-      credentialId: "CFE-2025-001",
-      badge: "https://via.placeholder.com/120x120.png?text=CFE",
+      name: "Full-Stack Web Development (MERN)",
+      code: "FSWD-301",
+      provider: "SKYREK Academy",
+      credentialId: "SKYREK-2025-089",
+      badge: mernBadge,
     },
     {
-      name: "Responsive Web Foundations",
-      code: "RWF-210",
-      provider: "Design Academy",
-      credentialId: "RWF-2025-045",
-      badge: "https://via.placeholder.com/120x120.png?text=RWF",
+      name: "Postman API Fundamentals Student Expert",
+      code: "PAF-200",
+      provider: "Postman",
+      credentialId: "POSTMAN-2025-014",
+      badge: postmanBadge,
     },
     {
-      name: "JavaScript Essentials Badge",
-      code: "JSB-150",
-      provider: "Code Institute",
-      credentialId: "JSB-2025-312",
-      badge: "https://via.placeholder.com/120x120.png?text=JS",
+      name: "Python for Beginners",
+      code: "PYB-110",
+      provider: "University of Moratuwa",
+      credentialId: "UOM-2025-233",
+      badge: pythonBadge,
     },
     {
-      name: "Cloud Fundamentals Sampler",
-      code: "CFS-090",
-      provider: "CloudHub",
-      credentialId: "CFS-2025-221",
-      badge: "https://via.placeholder.com/120x120.png?text=Cloud",
+      name: "Multicloud Network Associate",
+      code: "MNA-260",
+      provider: "Aviatrix Cloud Networking Platform",
+      credentialId: "AVIATRIX-2025-041",
+      badge: aviatrixBadge,
     },
   ];
 
   const sectionRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [titleVisible, setTitleVisible] = useState(false);
+  const [visibleCards, setVisibleCards] = useState([]);
 
   // Intersection Observer for animation
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    const titleObserver = new IntersectionObserver(
+      (entries) => {
+        if (!entries.length) return;
+        const entry = entries[0];
+        setTitleVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1, rootMargin: "72px 0px -55% 0px" }
+    );
+
+    const cardsObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) setIsVisible(true);
+          const index = parseInt(entry.target.dataset.index, 10);
+          if (Number.isNaN(index)) return;
+
+          if (entry.isIntersecting) {
+            setVisibleCards((prev) =>
+              prev.includes(index) ? prev : [...prev, index]
+            );
+          } else {
+            setVisibleCards((prev) => prev.filter((idx) => idx !== index));
+          }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.3 }
     );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => sectionRef.current && observer.unobserve(sectionRef.current);
+
+    const section = sectionRef.current;
+    const titleEl = section?.querySelector("#certifications-title");
+    const cards = section?.querySelectorAll(".cert-card") ?? [];
+
+    if (titleEl) titleObserver.observe(titleEl);
+    cards.forEach((card) => cardsObserver.observe(card));
+
+    return () => {
+      titleObserver.disconnect();
+      cardsObserver.disconnect();
+    };
   }, []);
 
   return (
@@ -60,8 +93,9 @@ function Certifications() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10 py-12 sm:py-16">
         <div className="text-center mb-12">
           <h2
+            id="certifications-title"
             className={`text-4xl sm:text-5xl lg:text-6xl font-black text-transparent bg-linear-to-r from-purple-400 via-fuchsia-500 to-purple-700 bg-clip-text transition-all duration-700 ${
-              isVisible
+              titleVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 -translate-y-20"
             }`}
@@ -70,7 +104,7 @@ function Certifications() {
           </h2>
           <div
             className={`h-1 w-24 bg-linear-to-r from-purple-400 to-pink-500 mx-auto transition-opacity duration-700 ${
-              isVisible ? "opacity-100" : "opacity-0"
+              titleVisible ? "opacity-100" : "opacity-0"
             }`}
           ></div>
         </div>
@@ -80,8 +114,9 @@ function Certifications() {
           {certs.map((cert, i) => (
             <div
               key={i}
-              className={`group relative h-64 w-full max-w-xs sm:max-w-sm transition-all duration-700 ${
-                isVisible
+              data-index={i}
+              className={`cert-card group relative h-64 w-full max-w-xs sm:max-w-sm transition-all duration-700 ${
+                visibleCards.includes(i)
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-10"
               }`}

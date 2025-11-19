@@ -19,7 +19,7 @@ function Education() {
     {
       institution: "COLLEGE OF TECHNOLOGY BADULLA",
       degree: "Draughtmenship",
-      period: "Completed",
+      period: "Completed-2022",
       logo: vocationalLogo,
     },
     {
@@ -32,29 +32,36 @@ function Education() {
   useEffect(() => {
     const titleObserver = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) setIsTitleVisible(true);
+        if (!entries.length) return;
+        const entry = entries[0];
+        setIsTitleVisible(entry.isIntersecting);
       },
-      { threshold: 0.2 }
+      { threshold: 0.25 }
     );
 
     const cardObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          const index = parseInt(entry.target.dataset.index, 10);
+          if (Number.isNaN(index)) return;
+
           if (entry.isIntersecting) {
-            const index = parseInt(entry.target.dataset.index);
             setVisibleIndexes((prev) =>
               prev.includes(index) ? prev : [...prev, index]
             );
+          } else {
+            setVisibleIndexes((prev) => prev.filter((idx) => idx !== index));
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.25 }
     );
 
     const section = sectionRef.current;
-    const cards = document.querySelectorAll(".edu-card");
+    const titleEl = section?.querySelector("#edu-title");
+    const cards = section?.querySelectorAll(".edu-card") ?? [];
 
-    if (section) titleObserver.observe(section.querySelector("#edu-title"));
+    if (titleEl) titleObserver.observe(titleEl);
     cards.forEach((card) => cardObserver.observe(card));
 
     return () => {

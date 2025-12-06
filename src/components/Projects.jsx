@@ -1,4 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
+import icmImg from "../assets/icm.png";
+import portfolioImg from "../assets/portfolio.png";
+import smsImg from "../assets/sms.png";
+import libraryImg from "../assets/library.png";
 
 function Projects() {
   const projects = [
@@ -9,7 +13,7 @@ function Projects() {
       technologies: "MongoDB, Express.js, React, Node.js, Tailwind CSS",
       github: "https://github.com/Geeth2000/i-computers",
       tag: "project 1",
-      image: "src/assets/icm.png",
+      image: icmImg,
     },
     {
       title: "Portfolio Website",
@@ -18,7 +22,7 @@ function Projects() {
       technologies: "React, Tailwind CSS, JavaScript",
       github: "https://github.com/Geeth2000/my-portfolio.git",
       tag: "project 2",
-      image: "src/assets/portfolio.png",
+      image: portfolioImg,
     },
     {
       title: "FOT Connect Mobile App",
@@ -27,7 +31,7 @@ function Projects() {
       technologies: "Android Studio, Java, XML, Figma",
       github: "https://github.com/Geeth2000/fot-connect",
       tag: "project 3",
-      image: "https://via.placeholder.com/600x400?text=FOT+Connect",
+      image: portfolioImg,
     },
     {
       title: "Student Mentoring System",
@@ -36,7 +40,7 @@ function Projects() {
       technologies: "MongoDB, Express.js, React, Node.js",
       github: "https://github.com/Geeth2000/student-mentoring-system",
       tag: "project 4",
-      image: "src/assets/sms.png",
+      image: smsImg,
     },
     {
       title: "Library Management System",
@@ -45,7 +49,7 @@ function Projects() {
       technologies: "PHP, HTML, CSS, JavaScript, MySQL",
       github: "https://github.com/DhanukaND1/library_system.git",
       tag: "project 5",
-      image: "src/assets/library.png",
+      image: libraryImg,
     },
   ];
 

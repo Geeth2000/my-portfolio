@@ -19,12 +19,12 @@ function Contact() {
   const socialLinks = [
     {
       label: "LinkedIn",
-      href: "https://www.linkedin.com/in/geethanjana-karunarathna/",
+      href: "https://www.linkedin.com/in/geethanjana-karunarathna2000?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
       icon: <FaLinkedinIn />,
     },
     {
       label: "GitHub",
-      href: "https://github.com/iro2002",
+      href: "https://github.com/Geeth2000",
       icon: <FaGithub />,
     },
     {

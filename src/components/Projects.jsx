@@ -9,16 +9,16 @@ function Projects() {
       technologies: "MongoDB, Express.js, React, Node.js, Tailwind CSS",
       github: "https://github.com/Geeth2000/i-computers",
       tag: "project 1",
-      image: "https://via.placeholder.com/600x400?text=I-Computers",
+      image: "src/assets/icm.png",
     },
     {
       title: "Portfolio Website",
       description:
         "Personal portfolio crafted to showcase projects, skills, and experience with polished UI styling, smooth animations, and performance optimizations.",
       technologies: "React, Tailwind CSS, JavaScript",
-      github: "https://github.com/Geeth2000/portfolio",
+      github: "https://github.com/Geeth2000/my-portfolio.git",
       tag: "project 2",
-      image: "https://via.placeholder.com/600x400?text=Portfolio",
+      image: "src/assets/portfolio.png",
     },
     {
       title: "FOT Connect Mobile App",
@@ -36,16 +36,16 @@ function Projects() {
       technologies: "MongoDB, Express.js, React, Node.js",
       github: "https://github.com/Geeth2000/student-mentoring-system",
       tag: "project 4",
-      image: "https://via.placeholder.com/600x400?text=Mentoring",
+      image: "src/assets/sms.png",
     },
     {
       title: "Library Management System",
       description:
         "Web portal for managing library inventory, user accounts, and circulation tasks with responsive layouts and full CRUD workflows.",
       technologies: "PHP, HTML, CSS, JavaScript, MySQL",
-      github: "https://github.com/Geeth2000/library-management",
+      github: "https://github.com/DhanukaND1/library_system.git",
       tag: "project 5",
-      image: "https://via.placeholder.com/600x400?text=Library",
+      image: "src/assets/library.png",
     },
   ];
 

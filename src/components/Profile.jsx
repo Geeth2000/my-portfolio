@@ -225,7 +225,7 @@ function Profile() {
                   icon: <FaGithub className="text-xl" />,
                 },
                 {
-                  href: "https://www.linkedin.com/in/geethanjana-karunarathna/",
+                  href: "https://www.linkedin.com/in/geethanjana-karunarathna2000?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
                   label: "LinkedIn",
                   icon: <FaLinkedin className="text-xl" />,
                 },

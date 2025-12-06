@@ -12,6 +12,8 @@ function Certifications() {
       provider: "SKYREK Academy",
       credentialId: "SKYREK-2025-089",
       badge: mernBadge,
+      certificateUrl:
+        "https://www.skyrekacademy.com/certificates/FSWD-301-2025-089",
     },
     {
       name: "Postman API Fundamentals Student Expert",
@@ -19,6 +21,7 @@ function Certifications() {
       provider: "Postman",
       credentialId: "POSTMAN-2025-014",
       badge: postmanBadge,
+      certificateUrl: "src/assets/postman2.png",
     },
     {
       name: "Python for Beginners",
@@ -26,6 +29,7 @@ function Certifications() {
       provider: "University of Moratuwa",
       credentialId: "UOM-2025-233",
       badge: pythonBadge,
+      certificateUrl: "src/assets/image.png",
     },
     {
       name: "Multicloud Network Associate",
@@ -33,6 +37,7 @@ function Certifications() {
       provider: "Aviatrix Cloud Networking Platform",
       credentialId: "AVIATRIX-2025-041",
       badge: aviatrixBadge,
+      certificateUrl: "src/assets/ace.png",
     },
   ];
 
@@ -160,10 +165,14 @@ function Certifications() {
                   <p className="text-purple-300 text-xs sm:text-sm text-center">
                     Credential ID: {cert.credentialId}
                   </p>
-                  <div className="inline-flex items-center text-purple-200 group-hover:translate-x-1 transition-transform duration-300 cursor-pointer text-xs sm:text-sm">
-                    <span className="font-semibold">View Certificate</span>
-                    <span className="ml-1">→</span>
-                  </div>
+                  <a
+                    href={cert.certificateUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-purple-200 group-hover:translate-x-1 transition-transform duration-300 cursor-pointer text-xs sm:text-sm"
+                  >
+                    View Certificate→
+                  </a>
                 </div>
 
                 {/* Decorative line */}

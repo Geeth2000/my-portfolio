@@ -11,7 +11,7 @@ function Certifications() {
       code: "FSWD-301",
       provider: "SKYREK Academy",
       credentialId: "SKYREK-2025-089",
-      badge: mernBadge,
+      //badge: mernBadge,
       certificateUrl:
         "https://www.skyrekacademy.com/certificates/FSWD-301-2025-089",
     },

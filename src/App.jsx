@@ -28,15 +28,39 @@ function App() {
   }, []);
 
   useEffect(() => {
+    let animationFrame = null;
+
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
+        if (animationFrame) cancelAnimationFrame(animationFrame);
+
+        animationFrame = requestAnimationFrame(() => {
+          const intersecting = entries.filter((entry) => entry.isIntersecting);
+          if (!intersecting.length) return;
+
+          const viewportFocusLine = window.innerHeight * 0.38;
+
+          const nearestToFocus = intersecting.reduce((closest, entry) => {
+            const distance = Math.abs(
+              entry.boundingClientRect.top - viewportFocusLine
+            );
+
+            if (!closest) return { entry, distance };
+            return distance < closest.distance ? { entry, distance } : closest;
+          }, null);
+
+          if (!nearestToFocus) return;
+
+          const nextActiveId = nearestToFocus.entry.target.id;
+          setActiveSection((current) =>
+            current === nextActiveId ? current : nextActiveId
+          );
         });
       },
-      { threshold: 0.6 }
+      {
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+        rootMargin: "-32% 0px -45% 0px",
+      }
     );
 
     navItems.forEach(({ id }) => {
@@ -44,7 +68,10 @@ function App() {
       if (section) observer.observe(section);
     });
 
-    return () => observer.disconnect();
+    return () => {
+      if (animationFrame) cancelAnimationFrame(animationFrame);
+      observer.disconnect();
+    };
   }, []);
 
   const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
@@ -78,7 +105,7 @@ function App() {
           </h1>
 
           {/* Desktop Menu */}
-          <ul className="hidden md:flex space-x-8">
+          <ul className="hidden md:flex space-x-5">
             {navItems.map((item) => (
               <li key={item.id}>
                 <a

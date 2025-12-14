@@ -3,6 +3,7 @@ import icmImg from "../assets/icm.png";
 import portfolioImg from "../assets/portfolio.png";
 import smsImg from "../assets/sms.png";
 import libraryImg from "../assets/library.png";
+import fotImg from "../assets/fot.png";
 
 function Projects() {
   const projects = [
@@ -29,9 +30,9 @@ function Projects() {
       description:
         "Native Android application delivering faculty news, sports, and event updates with responsive screens based on Figma prototypes.",
       technologies: "Android Studio, Java, XML, Figma",
-      github: "https://github.com/Geeth2000/fot-connect",
+      github: "https://github.com/Geeth2000/Fotconnect.git",
       tag: "project 3",
-      image: portfolioImg,
+      image: fotImg,
     },
     {
       title: "Student Mentoring System",
@@ -160,7 +161,7 @@ function Projects() {
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-56 sm:h-64 object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                      className="w-full h-64 sm:h-72 object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                     />
                   </div>
                 )}

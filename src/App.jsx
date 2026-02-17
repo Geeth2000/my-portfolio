@@ -5,6 +5,8 @@ import Certifications from "./components/Certifications";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Education from "./components/Education";
+import CustomCursor from "./components/CustomCursor";
+import FloatingOrbs from "./components/FloatingOrbs";
 import { FaBars, FaTimes } from "react-icons/fa";
 
 function App() {
@@ -42,7 +44,7 @@ function App() {
 
           const nearestToFocus = intersecting.reduce((closest, entry) => {
             const distance = Math.abs(
-              entry.boundingClientRect.top - viewportFocusLine
+              entry.boundingClientRect.top - viewportFocusLine,
             );
 
             if (!closest) return { entry, distance };
@@ -53,14 +55,14 @@ function App() {
 
           const nextActiveId = nearestToFocus.entry.target.id;
           setActiveSection((current) =>
-            current === nextActiveId ? current : nextActiveId
+            current === nextActiveId ? current : nextActiveId,
           );
         });
       },
       {
         threshold: [0, 0.25, 0.5, 0.75, 1],
         rootMargin: "-32% 0px -45% 0px",
-      }
+      },
     );
 
     navItems.forEach(({ id }) => {
@@ -79,33 +81,42 @@ function App() {
   const getNavItemClass = (itemId) => {
     const isActive = activeSection === itemId;
     const activeStyles =
-      "px-6 py-2 bg-linear-to-r from-purple-600 to-fuchsia-500 text-white rounded-full font-bold shadow-[0_0_15px_rgba(168,85,247,0.6)] transition-all duration-300 transform hover:scale-105 hover:opacity-90";
+      "px-5 py-2 bg-gradient-to-r from-sky-600/90 to-cyan-600/90 text-white rounded-full font-medium text-sm shadow-lg shadow-sky-500/25 transition-all duration-300 transform hover:shadow-sky-500/40";
     const baseStyles =
-      "font-semibold text-gray-200 hover:text-gray-300 transition-colors duration-300";
+      "px-4 py-2 font-medium text-sm text-gray-400 hover:text-white transition-all duration-300 rounded-full hover:bg-white/5";
 
     if (isActive) return activeStyles;
     return baseStyles;
   };
 
   return (
-    <div className="bg-black text-white min-h-screen font-poppins overflow-x-hidden">
+    <div className="bg-[#030108] text-white min-h-screen overflow-x-hidden">
+      {/* Custom Cursor */}
+      <CustomCursor />
+
+      {/* Floating Orbs Background */}
+      <FloatingOrbs />
+
       {/* Header */}
       <header
-        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        className={`fixed top-0 w-full z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-black/95 backdrop-blur-md border-b border-gray-800 py-3"
+            ? "bg-[#030108]/80 backdrop-blur-xl border-b border-white/5 py-3"
             : "bg-transparent py-5"
         }`}
       >
-        <nav className="container mx-auto px-4 flex justify-between items-center">
-          <h1 className="text-2xl font-black tracking-tight">
-            <span className="bg-linear-to-r from-white to-gray-400 bg-clip-text text-transparent">
-              GK
+        <nav className="container mx-auto px-6 flex justify-between items-center max-w-7xl">
+          <a href="#profile" className="group flex items-center gap-2">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-600 to-cyan-600 flex items-center justify-center shadow-lg shadow-sky-500/20 group-hover:shadow-sky-500/40 transition-all duration-300">
+              <span className="text-white font-bold text-lg">G</span>
+            </div>
+            <span className="text-xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent hidden sm:block">
+              Geethanjana
             </span>
-          </h1>
+          </a>
 
           {/* Desktop Menu */}
-          <ul className="hidden md:flex space-x-5">
+          <ul className="hidden md:flex items-center gap-1 bg-white/[0.02] backdrop-blur-sm rounded-full p-1.5 border border-white/5">
             {navItems.map((item) => (
               <li key={item.id}>
                 <a
@@ -128,13 +139,21 @@ function App() {
         </nav>
 
         {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <ul className="md:hidden flex flex-col items-center space-y-4 mt-4 pb-4 border-t border-gray-800 bg-black/90">
+        <div
+          className={`md:hidden absolute top-full left-0 right-0 bg-[#030108]/95 backdrop-blur-xl border-b border-white/5 transition-all duration-300 overflow-hidden ${
+            mobileMenuOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
+          }`}
+        >
+          <ul className="flex flex-col items-center gap-2 py-6 px-4">
             {navItems.map((item) => (
-              <li key={item.id}>
+              <li key={item.id} className="w-full max-w-xs">
                 <a
                   href={`#${item.id}`}
-                  className={`${getNavItemClass(item.id)} text-lg text-center`}
+                  className={`block text-center py-3 px-6 rounded-xl transition-all duration-300 ${
+                    activeSection === item.id
+                      ? "bg-gradient-to-r from-sky-600/90 to-cyan-600/90 text-white font-medium shadow-lg shadow-sky-500/25"
+                      : "text-gray-400 hover:text-white hover:bg-white/5"
+                  }`}
                   onClick={() => {
                     setActiveSection(item.id);
                     setMobileMenuOpen(false);
@@ -145,7 +164,7 @@ function App() {
               </li>
             ))}
           </ul>
-        )}
+        </div>
       </header>
 
       {/* Main Content */}
@@ -159,20 +178,40 @@ function App() {
       </main>
 
       {/* Footer */}
-      <footer className="relative bg-linear-to-t from-gray-900 to-black text-center py-12 border-t border-gray-800 overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
-              backgroundSize: "30px 30px",
-            }}
-          ></div>
+      <footer className="relative bg-[#030108] text-center py-16 border-t border-white/5 overflow-hidden">
+        {/* Subtle gradient glow */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-sky-600/10 rounded-full blur-[120px]"></div>
         </div>
-        <div className="relative z-10 space-y-4">
-          <p className="text-gray-400 font-semibold">
-            © 2025 Geethanjana Karunarathna. All rights reserved.
+
+        <div className="relative z-10 container mx-auto px-6 max-w-7xl">
+          {/* Logo */}
+          <div className="flex justify-center mb-6">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-sky-600 to-cyan-600 flex items-center justify-center shadow-lg shadow-sky-500/20">
+              <span className="text-white font-bold text-xl">G</span>
+            </div>
+          </div>
+
+          {/* Quick links */}
+          <div className="flex flex-wrap justify-center gap-6 mb-8">
+            {navItems.map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                className="text-sm text-gray-500 hover:text-sky-400 transition-colors duration-300"
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+
+          {/* Divider */}
+          <div className="w-full max-w-md mx-auto h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-8"></div>
+
+          {/* Copyright */}
+          <p className="text-gray-500 text-sm">
+            © {new Date().getFullYear()} Geethanjana Karunarathna. Crafted with
+            passion.
           </p>
         </div>
       </footer>

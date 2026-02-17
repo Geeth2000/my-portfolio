@@ -102,43 +102,38 @@ function Projects() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="projects" className="bg-black relative">
-      {/* subtle purple grid background */}
-      <div className="absolute inset-0 opacity-20 pointer-events-none">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(168,85,247,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(168,85,247,0.15) 1px, transparent 1px)",
-            backgroundSize: "50px 50px",
-          }}
-        ></div>
+    <section ref={sectionRef} id="projects" className="bg-[#030108] relative py-24 sm:py-32">
+      {/* Background elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 right-0 w-96 h-96 bg-sky-600/10 rounded-full blur-[120px]"></div>
+        <div className="absolute bottom-1/4 left-0 w-80 h-80 bg-cyan-600/10 rounded-full blur-[100px]"></div>
       </div>
-      <div className="absolute inset-0 bg-linear-to-br from-[#1a002b]/60 via-[#20034d]/70 to-[#0b0014]/90"></div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10 py-16 sm:py-20">
+      <div className="container mx-auto px-6 max-w-6xl relative z-10">
         {/* Title */}
         <div
-          className={`text-center mb-20 transition-all duration-1000 ease-out ${
+          className={`text-center mb-16 transition-all duration-700 ease-out ${
             titleVisible
               ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-16"
+              : "opacity-0 translate-y-10"
           }`}
         >
+          <span className="inline-block px-4 py-1.5 bg-sky-500/10 rounded-full text-sky-400 text-sm font-medium mb-4 border border-sky-500/20">
+            My Work
+          </span>
           <h2
             id="projects-title"
-            className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter mb-4 text-transparent bg-linear-to-r from-purple-400 via-fuchsia-500 to-purple-700 bg-clip-text"
+            className="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-4"
           >
-            Featured Projects
+            Featured <span className="bg-gradient-to-r from-sky-400 to-cyan-400 bg-clip-text text-transparent">Projects</span>
           </h2>
-          <p className="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto">
-            Explore my latest projects in full-stack development, web design,
-            and modern app creation.
+          <p className="text-gray-400 max-w-xl mx-auto">
+            Explore my latest work in full-stack development and modern app creation
           </p>
         </div>
 
         {/* Project cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((project, index) => {
             const isVisible = visibleProjects.includes(index);
             const direction = index % 2 === 0 ? "left" : "right";
@@ -147,45 +142,52 @@ function Projects() {
               <div
                 key={index}
                 data-index={index}
-                className={`project-card group relative flex flex-col bg-linear-to-br from-[#1a002b]/80 to-black rounded-3xl border border-purple-600/40 hover:border-purple-300 transition-all duration-1000 ease-out hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(168,85,247,0.45)] overflow-hidden ${
+                className={`project-card group relative flex flex-col bg-white/[0.02] rounded-2xl border border-white/5 transition-all duration-500 hover:bg-white/[0.04] hover:border-sky-500/20 hover:-translate-y-1 overflow-hidden ${
                   isVisible
                     ? "opacity-100 translate-y-0 md:translate-x-0"
                     : direction === "left"
-                    ? "opacity-0 translate-y-10 md:-translate-x-24"
-                    : "opacity-0 translate-y-10 md:translate-x-24"
+                    ? "opacity-0 translate-y-10 md:-translate-x-12"
+                    : "opacity-0 translate-y-10 md:translate-x-12"
                 }`}
-                style={{ transitionDelay: `${index * 0.12}s` }}
+                style={{ transitionDelay: `${index * 0.1}s` }}
               >
                 {project.image && (
-                  <div className="overflow-hidden mx-4 mt-4 rounded-2xl border border-purple-800/40">
+                  <div className="overflow-hidden">
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-64 sm:h-72 object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                      className="w-full h-56 sm:h-64 object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
                 )}
 
-                <div className="p-6 sm:p-8 flex flex-col flex-1">
-                  <h3 className="text-2xl sm:text-3xl font-bold mt-4 bg-linear-to-r from-purple-400 via-pink-500 to-purple-700 bg-clip-text text-transparent">
+                <div className="p-6 flex flex-col flex-1">
+                  <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-sky-400 transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-gray-300 text-sm sm:text-base mt-3 leading-relaxed">
+                  <p className="text-gray-400 text-sm leading-relaxed mb-4 flex-1">
                     {project.description}
                   </p>
-                  <p className="text-xs sm:text-sm text-gray-400 mt-3">
-                    <span className="font-semibold text-purple-300">
-                      Tech Stack:{" "}
-                    </span>
-                    {project.technologies}
-                  </p>
+                  
+                  {/* Tech stack tags */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.technologies.split(', ').slice(0, 4).map((tech, i) => (
+                      <span key={i} className="px-2.5 py-1 bg-white/5 rounded-lg text-xs text-gray-400 border border-white/5">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                  
                   <a
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 mt-4 sm:mt-6 text-sm sm:text-base text-purple-300 hover:text-fuchsia-400 transition-colors font-semibold"
+                    className="inline-flex items-center gap-2 text-sm text-sky-400 hover:text-sky-300 transition-colors font-medium"
                   >
-                    View Project →
+                    View on GitHub
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
                   </a>
                 </div>
               </div>

@@ -53,7 +53,7 @@ function Certifications() {
         const entry = entries[0];
         setTitleVisible(entry.isIntersecting);
       },
-      { threshold: 0.1, rootMargin: "72px 0px -55% 0px" }
+      { threshold: 0.1, rootMargin: "72px 0px -55% 0px" },
     );
 
     const cardsObserver = new IntersectionObserver(
@@ -64,14 +64,14 @@ function Certifications() {
 
           if (entry.isIntersecting) {
             setVisibleCards((prev) =>
-              prev.includes(index) ? prev : [...prev, index]
+              prev.includes(index) ? prev : [...prev, index],
             );
           } else {
             setVisibleCards((prev) => prev.filter((idx) => idx !== index));
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
 
     const section = sectionRef.current;
@@ -91,92 +91,102 @@ function Certifications() {
     <section
       ref={sectionRef}
       id="certifications"
-      className="relative min-h-screen bg-black flex flex-col justify-center overflow-hidden"
+      className="relative py-24 sm:py-32 bg-[#030108] overflow-hidden"
     >
-      <div className="absolute inset-0 bg-linear-to-b from-[#1a002b]/70 via-[#20034d]/80 to-[#0b0014]/90 opacity-70"></div>
+      {/* Background elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/3 left-1/4 w-80 h-80 bg-sky-600/10 rounded-full blur-[120px]"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-cyan-600/10 rounded-full blur-[100px]"></div>
+      </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10 py-12 sm:py-16">
-        <div className="text-center mb-12">
+      <div className="container mx-auto px-6 max-w-6xl relative z-10">
+        <div className="text-center mb-16">
+          <span className="inline-block px-4 py-1.5 bg-sky-500/10 rounded-full text-sky-400 text-sm font-medium mb-4 border border-sky-500/20">
+            Professional Growth
+          </span>
           <h2
             id="certifications-title"
-            className={`text-4xl sm:text-5xl lg:text-6xl font-black text-transparent bg-linear-to-r from-purple-400 via-fuchsia-500 to-purple-700 bg-clip-text transition-all duration-700 ${
+            className={`text-4xl sm:text-5xl font-bold text-white mb-4 transition-all duration-700 ${
               titleVisible
                 ? "opacity-100 translate-y-0"
-                : "opacity-0 -translate-y-20"
+                : "opacity-0 -translate-y-10"
             }`}
           >
-            Certifications
+            <span className="bg-gradient-to-r from-sky-400 to-cyan-400 bg-clip-text text-transparent">
+              Certifications
+            </span>
           </h2>
-          <div
-            className={`h-1 w-24 bg-linear-to-r from-purple-400 to-pink-500 mx-auto transition-opacity duration-700 ${
-              titleVisible ? "opacity-100" : "opacity-0"
-            }`}
-          ></div>
+          <p className="text-gray-400 max-w-xl mx-auto">
+            Credentials that validate my expertise and continuous learning
+          </p>
         </div>
 
         {/* CERTIFICATE CARDS */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-8 place-items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {certs.map((cert, i) => (
             <div
               key={i}
               data-index={i}
-              className={`cert-card group relative h-64 w-full max-w-xs sm:max-w-sm transition-all duration-700 ${
+              className={`cert-card group relative transition-all duration-500 ${
                 visibleCards.includes(i)
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-10"
               }`}
               style={{ animationDelay: `${i * 0.1}s` }}
             >
-              <div className="relative w-full h-full bg-linear-to-br from-[#1a002b]/70 to-black rounded-xl border border-purple-600/40 hover:border-purple-400 transition-all duration-300 overflow-hidden">
-                {/* Front */}
-                <div className="flex flex-col items-center justify-center h-full px-6 py-5 space-y-3 transition-opacity duration-300 group-hover:opacity-0">
-                  <div className="w-14 h-14 flex items-center justify-center">
+              <div className="relative h-full p-6 rounded-2xl bg-white/[0.02] border border-white/5 transition-all duration-300 hover:bg-white/[0.04] hover:border-sky-500/20 hover:-translate-y-1 overflow-hidden">
+                {/* Badge */}
+                <div className="flex justify-center mb-4">
+                  <div className="w-16 h-16 rounded-xl bg-white/5 p-2 flex items-center justify-center">
                     <img
                       src={cert.badge}
                       alt={cert.name}
-                      className="w-full h-full object-contain filter brightness-95 group-hover:brightness-125 transition-all duration-300"
+                      className="w-full h-full object-contain"
                     />
                   </div>
-                  <div className="inline-block px-3 py-1 bg-purple-500/10 backdrop-blur-sm rounded-full border border-purple-500/30">
-                    <span className="text-xs font-bold text-purple-300">
-                      {cert.code}
-                    </span>
-                  </div>
-                  <h3 className="text-base sm:text-lg font-bold text-white text-center">
-                    {cert.name}
-                  </h3>
-                  <p className="text-gray-400 text-xs sm:text-sm">
-                    {cert.provider}
-                  </p>
                 </div>
 
-                {/* Back Hover Layer */}
-                <div className="absolute inset-0 bg-linear-to-br from-purple-900 to-black px-6 py-5 flex flex-col items-center justify-center space-y-3 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                  <div className="w-14 h-14 flex items-center justify-center">
-                    <img
-                      src={cert.badge}
-                      alt={cert.name}
-                      className="w-full h-full object-contain filter brightness-90"
-                    />
-                  </div>
-                  <h3 className="text-base sm:text-lg font-bold text-white text-center">
-                    {cert.name}
-                  </h3>
-                  <p className="text-purple-300 text-xs sm:text-sm text-center">
-                    Credential ID: {cert.credentialId}
-                  </p>
+                {/* Code badge */}
+                <div className="flex justify-center mb-3">
+                  <span className="px-3 py-1 bg-sky-500/10 rounded-full text-xs font-medium text-sky-400 border border-sky-500/20">
+                    {cert.code}
+                  </span>
+                </div>
+
+                {/* Title */}
+                <h3 className="text-base font-semibold text-white text-center mb-2 line-clamp-2">
+                  {cert.name}
+                </h3>
+
+                {/* Provider */}
+                <p className="text-gray-500 text-sm text-center mb-4">
+                  {cert.provider}
+                </p>
+
+                {/* View link */}
+                <div className="text-center">
                   <a
                     href={cert.certificateUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center text-purple-200 group-hover:translate-x-1 transition-transform duration-300 cursor-pointer text-xs sm:text-sm"
+                    className="inline-flex items-center gap-1 text-sm text-sky-400 hover:text-sky-300 transition-colors"
                   >
-                    View Certificate→
+                    View Certificate
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
                   </a>
                 </div>
-
-                {/* Decorative line */}
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-linear-to-r from-transparent via-purple-500 to-transparent group-hover:via-pink-500 transition-colors duration-500"></div>
               </div>
             </div>
           ))}

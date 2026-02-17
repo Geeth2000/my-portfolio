@@ -12,19 +12,20 @@ function Education() {
     {
       institution: "University of Colombo",
       degree:
-        "Bachelor of Information and Communication Technology (BICT Honours)",
-      period: "2021 – Present",
+        "Bachelor of Information and Communication Technology (BICT Honours)",
+      period: "2021 - Present",
       logo: uocLogo,
     },
     {
-      institution: "COLLEGE OF TECHNOLOGY BADULLA",
+      institution: "College of Technology Badulla",
       degree: "Draughtmenship",
-      period: "Completed-2022",
+      period: "Completed 2022",
       logo: vocationalLogo,
     },
     {
       institution: "Bandarawela Dharmapala College",
-      period: "2019 – 2021",
+      degree: "Advanced Level Studies",
+      period: "2019 - 2021",
       logo: advancedLogo,
     },
   ];
@@ -74,94 +75,79 @@ function Education() {
     <section
       id="education"
       ref={sectionRef}
-      className="relative py-16 sm:py-20 md:py-24 min-h-screen bg-black text-white overflow-hidden"
+      className="relative py-24 sm:py-32 bg-[#030108] text-white overflow-hidden"
     >
-      {/* Background grid & gradient */}
-      <div className="absolute inset-0 opacity-20 pointer-events-none">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(168,85,247,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(168,85,247,0.15) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-          }}
-        ></div>
+      {/* Background elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/3 left-1/4 w-80 h-80 bg-sky-600/10 rounded-full blur-[120px]"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-cyan-600/10 rounded-full blur-[100px]"></div>
       </div>
-      <div className="absolute inset-0 bg-linear-to-br from-[#1a002b]/70 via-[#20034d]/80 to-[#0b0014]/90"></div>
 
-      <div className="container mx-auto px-4 sm:px-6 max-w-6xl relative z-10">
+      <div className="container mx-auto px-6 max-w-5xl relative z-10">
         <div className="text-center mb-16">
+          <span className="inline-block px-4 py-1.5 bg-sky-500/10 rounded-full text-sky-400 text-sm font-medium mb-4 border border-sky-500/20">
+            Learning Path
+          </span>
           <h2
             id="edu-title"
-            className={`text-3xl sm:text-4xl md:text-5xl font-extrabold text-transparent bg-linear-to-r from-purple-400 via-fuchsia-500 to-purple-700 bg-clip-text transition-all duration-1000 ease-out ${
+            className={`text-4xl sm:text-5xl font-bold text-white mb-4 transition-all duration-700 ease-out ${
               isTitleVisible
                 ? "opacity-100 translate-x-0"
-                : "opacity-0 -translate-x-32"
+                : "opacity-0 -translate-x-10"
             }`}
           >
-            Academic Journey
+            Academic <span className="bg-gradient-to-r from-sky-400 to-cyan-400 bg-clip-text text-transparent">Journey</span>
           </h2>
-          <p
-            className={`mt-4 text-gray-400 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed transition-opacity duration-1000 ${
-              isTitleVisible ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            A timeline of my educational milestones
+          <p className="text-gray-400 max-w-xl mx-auto">
+            A timeline of my educational milestones and achievements
           </p>
         </div>
 
-        <div className="relative max-w-4xl mx-auto">
-          {/* central line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-purple-600/40 h-full rounded-full hidden md:block"></div>
+        <div className="relative max-w-3xl mx-auto">
+          {/* Central timeline line */}
+          <div className="absolute left-8 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-px bg-gradient-to-b from-sky-500/50 via-sky-500/20 to-transparent"></div>
 
           {educationData.map((edu, index) => {
             const isVisible = visibleIndexes.includes(index);
-            const direction = index % 2 === 0 ? "left" : "right";
 
             return (
               <div
                 key={index}
                 data-index={index}
-                className={`edu-card relative mb-12 last:mb-0 flex flex-col md:flex-row items-center ${
-                  direction === "left" ? "md:flex-row" : "md:flex-row-reverse"
-                } transition-all duration-1000 ease-out ${
+                className={`edu-card relative flex items-start gap-6 md:gap-0 mb-12 last:mb-0 transition-all duration-700 ease-out ${
                   isVisible
-                    ? "opacity-100 translate-x-0"
-                    : direction === "left"
-                    ? "opacity-0 -translate-x-32"
-                    : "opacity-0 translate-x-32"
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-10"
                 }`}
+                style={{ transitionDelay: `${index * 0.15}s` }}
               >
-                {/* dot */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-purple-500 rounded-full border-4 border-black shadow-[0_0_15px_rgba(168,85,247,0.8)] hidden md:block"></div>
+                {/* Timeline dot */}
+                <div className="absolute left-8 md:left-1/2 -translate-x-1/2 w-4 h-4 bg-sky-500 rounded-full border-4 border-[#030108] shadow-[0_0_20px_rgba(14,165,233,0.5)] z-10"></div>
 
-                {/* card */}
-                <div
-                  className={`w-full md:w-5/12 max-w-xl p-6 sm:p-8 rounded-2xl bg-linear-to-b from-[#1a002b]/80 to-black border border-purple-600/30 shadow-lg transition-transform duration-500 ease-in-out hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(168,85,247,0.6)] hover:-translate-y-2 ${
-                    direction === "left" ? "md:mr-12" : "md:ml-12"
-                  }`}
-                  style={{ perspective: "1000px" }}
-                >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
-                    <div className="flex items-center gap-4 flex-wrap sm:flex-nowrap">
-                      <img
-                        src={edu.logo}
-                        alt={`${edu.institution} logo`}
-                        className="w-16 h-16 object-contain drop-shadow-[0_0_10px_rgba(168,85,247,0.6)]"
-                      />
+                {/* Card - alternating sides on desktop */}
+                <div className={`ml-16 md:ml-0 md:w-[calc(50%-2rem)] ${index % 2 === 0 ? 'md:mr-auto md:pr-8' : 'md:ml-auto md:pl-8'}`}>
+                  <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 transition-all duration-300 hover:bg-white/[0.04] hover:border-sky-500/20 hover:-translate-y-1">
+                    <div className="flex items-start gap-4 mb-4">
+                      <div className="w-14 h-14 rounded-xl bg-white/5 p-2 flex-shrink-0">
+                        <img
+                          src={edu.logo}
+                          alt={`${edu.institution} logo`}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
                       <div>
-                        <h3 className="text-lg sm:text-xl font-semibold text-white">
+                        <h3 className="text-lg font-semibold text-white">
                           {edu.institution}
                         </h3>
-                        <p className="text-purple-300 text-sm sm:text-base">
+                        <span className="inline-block px-2.5 py-0.5 bg-sky-500/10 rounded-full text-xs font-medium text-sky-400 border border-sky-500/20 mt-1">
                           {edu.period}
-                        </p>
+                        </span>
                       </div>
                     </div>
+                    <p className="text-gray-400 text-sm leading-relaxed">
+                      {edu.degree}
+                    </p>
                   </div>
-                  <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
-                    {edu.degree}
-                  </p>
                 </div>
               </div>
             );

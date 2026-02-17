@@ -30,7 +30,7 @@ function Skills() {
         const entry = entries[0];
         setIsVisible(entry.isIntersecting);
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
 
     observer.observe(section);
@@ -56,75 +56,64 @@ function Skills() {
     <section
       id="skills"
       ref={sectionRef}
-      className="relative py-20 sm:py-28 bg-black overflow-hidden"
+      className="relative py-24 sm:py-32 bg-[#030108] overflow-hidden"
     >
-      {/* Animated grid overlay */}
-      <div className="absolute inset-0 opacity-20 pointer-events-none">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(120,0,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(120,0,255,0.15) 1px, transparent 1px)",
-            backgroundSize: "50px 50px",
-          }}
-        ></div>
+      {/* Background elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 right-0 w-96 h-96 bg-sky-600/10 rounded-full blur-[120px]"></div>
+        <div className="absolute bottom-1/4 left-0 w-80 h-80 bg-cyan-600/10 rounded-full blur-[100px]"></div>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10 max-w-6xl">
+      <div className="container mx-auto px-6 relative z-10 max-w-6xl">
         {/* Section title */}
         <div className="text-center mb-16">
+          <span className="inline-block px-4 py-1.5 bg-sky-500/10 rounded-full text-sky-400 text-sm font-medium mb-4 border border-sky-500/20">
+            What I Work With
+          </span>
           <h2
-            className={`text-4xl sm:text-5xl font-extrabold tracking-tight text-transparent bg-linear-to-r from-purple-400 via-fuchsia-500 to-purple-700 bg-clip-text mb-3 transition-all ${
-              isVisible ? "animate-fadeInUp" : "opacity-0 translate-y-6"
+            className={`text-4xl sm:text-5xl font-bold tracking-tight text-white mb-4 transition-all ${
+              isVisible ? "animate-slideUp" : "opacity-0 translate-y-6"
             }`}
           >
-            My Skills
+            My{" "}
+            <span className="bg-gradient-to-r from-sky-400 to-cyan-400 bg-clip-text text-transparent">
+              Skills
+            </span>
           </h2>
-          <div
-            className={`h-1 w-24 mx-auto bg-linear-to-r from-purple-400 to-pink-500 transition-all duration-700 ${
-              isVisible ? "opacity-100" : "opacity-0"
-            }`}
-          ></div>
+          <p className="text-gray-400 max-w-xl mx-auto">
+            Technologies and tools I use to bring ideas to life
+          </p>
         </div>
 
         {/* Skills grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
           {skills.map(({ Icon, label, color }, i) => (
             <div
               key={i}
-              className={`relative group p-8 rounded-xl border border-purple-600/20 bg-linear-to-b from-[#1a002b]/60 to-[#0b0014]/60
-                          transition-all duration-500 hover:-translate-y-2 hover:border-purple-400 hover:shadow-[0_0_30px_rgba(168,85,247,0.45)] ${
+              className={`group relative p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/5
+                          transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.04] hover:border-sky-500/20 ${
                             isVisible
-                              ? "animate-fadeInUp"
+                              ? "animate-slideUp"
                               : "opacity-0 translate-y-4"
                           }`}
-              style={{ animationDelay: `${i * 0.1}s` }}
+              style={{ animationDelay: `${i * 0.05}s` }}
             >
-              <div className="absolute inset-0 rounded-xl bg-linear-to-r from-purple-500/20 via-fuchsia-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
-
-              <div className="relative z-10 flex flex-col items-center justify-center">
-                <Icon
-                  size={50}
-                  style={{ color }}
-                  className="drop-shadow-[0_0_8px_rgba(168,85,247,0.7)] transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-110"
-                />
-                <p className="mt-4 font-semibold text-gray-200">{label}</p>
+              <div className="relative z-10 flex flex-col items-center justify-center gap-4">
+                <div className="p-3 rounded-xl bg-white/5 group-hover:bg-white/10 transition-colors duration-300">
+                  <Icon
+                    size={36}
+                    style={{ color }}
+                    className="transition-transform duration-300 group-hover:scale-110"
+                  />
+                </div>
+                <p className="font-medium text-gray-300 text-sm sm:text-base">
+                  {label}
+                </p>
               </div>
             </div>
           ))}
         </div>
       </div>
-
-      {/* keyframes */}
-      <style>{`
-        @keyframes fadeInUp {
-          0% {opacity:0;transform:translateY(20px);}
-          100% {opacity:1;transform:translateY(0);}
-        }
-        .animate-fadeInUp {
-          animation: fadeInUp 0.8s ease-out forwards;
-        }
-      `}</style>
     </section>
   );
 }

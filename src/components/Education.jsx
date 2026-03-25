@@ -13,7 +13,7 @@ function Education() {
       institution: "University of Colombo",
       degree:
         "Bachelor of Information and Communication Technology (BICT Honours)",
-      period: "2021 - Present",
+      period: "2023 - Present",
       logo: uocLogo,
     },
     {
@@ -37,7 +37,7 @@ function Education() {
         const entry = entries[0];
         setIsTitleVisible(entry.isIntersecting);
       },
-      { threshold: 0.25 }
+      { threshold: 0.25 },
     );
 
     const cardObserver = new IntersectionObserver(
@@ -48,14 +48,14 @@ function Education() {
 
           if (entry.isIntersecting) {
             setVisibleIndexes((prev) =>
-              prev.includes(index) ? prev : [...prev, index]
+              prev.includes(index) ? prev : [...prev, index],
             );
           } else {
             setVisibleIndexes((prev) => prev.filter((idx) => idx !== index));
           }
         });
       },
-      { threshold: 0.25 }
+      { threshold: 0.25 },
     );
 
     const section = sectionRef.current;
@@ -96,7 +96,10 @@ function Education() {
                 : "opacity-0 -translate-x-10"
             }`}
           >
-            Academic <span className="bg-gradient-to-r from-sky-400 to-cyan-400 bg-clip-text text-transparent">Journey</span>
+            Academic{" "}
+            <span className="bg-gradient-to-r from-sky-400 to-cyan-400 bg-clip-text text-transparent">
+              Journey
+            </span>
           </h2>
           <p className="text-gray-400 max-w-xl mx-auto">
             A timeline of my educational milestones and achievements
@@ -125,7 +128,9 @@ function Education() {
                 <div className="absolute left-8 md:left-1/2 -translate-x-1/2 w-4 h-4 bg-sky-500 rounded-full border-4 border-[#030108] shadow-[0_0_20px_rgba(14,165,233,0.5)] z-10"></div>
 
                 {/* Card - alternating sides on desktop */}
-                <div className={`ml-16 md:ml-0 md:w-[calc(50%-2rem)] ${index % 2 === 0 ? 'md:mr-auto md:pr-8' : 'md:ml-auto md:pl-8'}`}>
+                <div
+                  className={`ml-16 md:ml-0 md:w-[calc(50%-2rem)] ${index % 2 === 0 ? "md:mr-auto md:pr-8" : "md:ml-auto md:pl-8"}`}
+                >
                   <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 transition-all duration-300 hover:bg-white/[0.04] hover:border-sky-500/20 hover:-translate-y-1">
                     <div className="flex items-start gap-4 mb-4">
                       <div className="w-14 h-14 rounded-xl bg-white/5 p-2 flex-shrink-0">

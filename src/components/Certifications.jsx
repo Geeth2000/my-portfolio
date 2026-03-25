@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import mernBadge from "../assets/ifs.png";
+import mernBadge from "../assets/skyrek.png";
 import postmanBadge from "../assets/postmon.png";
 import pythonBadge from "../assets/image.png";
 import aviatrixBadge from "../assets/ace.png";
@@ -11,9 +11,8 @@ function Certifications() {
       code: "FSWD-301",
       provider: "SKYREK Academy",
       credentialId: "SKYREK-2025-089",
-      //badge: mernBadge,
-      certificateUrl:
-        "https://www.skyrekacademy.com/certificates/FSWD-301-2025-089",
+      badge: mernBadge,
+      certificateUrl: "src/assets/skyrek.png",
     },
     {
       name: "Postman API Fundamentals Student Expert",
